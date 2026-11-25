@@ -1,0 +1,287 @@
+{
+ "frames": [
+  {
+   "id": "202606112100",
+   "label": "Thu Jun 11  4:00 PM CDT  (2100Z)",
+   "skip": {
+    "s_plains": {
+     "srh1obs": "Nothing to show in Southern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "c_plains": {
+     "srh1obs": "Nothing to show in Central Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "n_plains": {
+     "cinchg": "Nothing to show in Northern Plains: no MLCIN changes of 25+ J/kg in unstable air in the last hour.",
+     "srh1obs": "Nothing to show in Northern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "southeast": {
+     "srh1obs": "Nothing to show in Southeast: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    }
+   }
+  },
+  {
+   "id": "202606112115",
+   "label": "Thu Jun 11  4:15 PM CDT  (2115Z)",
+   "skip": {
+    "s_plains": {
+     "srh1obs": "Nothing to show in Southern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "c_plains": {
+     "srh1obs": "Nothing to show in Central Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "n_plains": {
+     "cinchg": "Nothing to show in Northern Plains: no MLCIN changes of 25+ J/kg in unstable air in the last hour.",
+     "srh1obs": "Nothing to show in Northern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+.",
+     "stp": "Nothing to show in Northern Plains: no STP of 0.5 or more.",
+     "tvis": "Nothing to show in Northern Plains: no STP of 0.5 or more, so no tornado environment to rate."
+    },
+    "southeast": {
+     "srh1obs": "Nothing to show in Southeast: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    }
+   }
+  },
+  {
+   "id": "202606112130",
+   "label": "Thu Jun 11  4:30 PM CDT  (2130Z)",
+   "skip": {
+    "s_plains": {
+     "srh1obs": "Nothing to show in Southern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "c_plains": {
+     "srh1obs": "Nothing to show in Central Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "n_plains": {
+     "cinchg": "Nothing to show in Northern Plains: no MLCIN changes of 25+ J/kg in unstable air in the last hour.",
+     "srh1obs": "Nothing to show in Northern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+.",
+     "stp": "Nothing to show in Northern Plains: no STP of 0.5 or more.",
+     "tvis": "Nothing to show in Northern Plains: no STP of 0.5 or more, so no tornado environment to rate."
+    },
+    "southeast": {
+     "srh1obs": "Nothing to show in Southeast: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    }
+   }
+  },
+  {
+   "id": "202606112145",
+   "label": "Thu Jun 11  4:45 PM CDT  (2145Z)",
+   "skip": {
+    "s_plains": {
+     "srh1obs": "Nothing to show in Southern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "c_plains": {
+     "srh1obs": "Nothing to show in Central Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "n_plains": {
+     "cinchg": "Nothing to show in Northern Plains: no MLCIN changes of 25+ J/kg in unstable air in the last hour.",
+     "srh1obs": "Nothing to show in Northern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "southeast": {
+     "srh1obs": "Nothing to show in Southeast: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    }
+   }
+  },
+  {
+   "id": "202606112200",
+   "label": "Thu Jun 11  5:00 PM CDT  (2200Z)",
+   "skip": {
+    "s_plains": {
+     "srh1obs": "Nothing to show in Southern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "c_plains": {
+     "srh1obs": "Nothing to show in Central Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "n_plains": {
+     "cinchg": "Nothing to show in Northern Plains: no MLCIN changes of 25+ J/kg in unstable air in the last hour.",
+     "srh1obs": "Nothing to show in Northern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "southeast": {
+     "srh1obs": "Nothing to show in Southeast: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    }
+   }
+  },
+  {
+   "id": "202606112215",
+   "label": "Thu Jun 11  5:15 PM CDT  (2215Z)",
+   "skip": {
+    "n_plains": {
+     "cinchg": "Nothing to show in Northern Plains: no MLCIN changes of 25+ J/kg in unstable air in the last hour.",
+     "srh1obs": "Nothing to show in Northern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+.",
+     "stp": "Nothing to show in Northern Plains: no STP of 0.5 or more.",
+     "tvis": "Nothing to show in Northern Plains: no STP of 0.5 or more, so no tornado environment to rate."
+    }
+   }
+  },
+  {
+   "id": "202606112230",
+   "label": "Thu Jun 11  5:30 PM CDT  (2230Z)",
+   "skip": {
+    "n_plains": {
+     "cinchg": "Nothing to show in Northern Plains: no MLCIN changes of 25+ J/kg in unstable air in the last hour.",
+     "srh1obs": "Nothing to show in Northern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+.",
+     "stp": "Nothing to show in Northern Plains: no STP of 0.5 or more.",
+     "tvis": "Nothing to show in Northern Plains: no STP of 0.5 or more, so no tornado environment to rate."
+    }
+   }
+  },
+  {
+   "id": "202606112245",
+   "label": "Thu Jun 11  5:45 PM CDT  (2245Z)",
+   "skip": {
+    "n_plains": {
+     "srh1obs": "Nothing to show in Northern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    }
+   }
+  },
+  {
+   "id": "202606112300",
+   "label": "Thu Jun 11  6:00 PM CDT  (2300Z)",
+   "skip": {
+    "n_plains": {
+     "cinchg": "Nothing to show in Northern Plains: no MLCIN changes of 25+ J/kg in unstable air in the last hour.",
+     "srh1obs": "Nothing to show in Northern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    }
+   }
+  },
+  {
+   "id": "202606112315",
+   "label": "Thu Jun 11  6:15 PM CDT  (2315Z)",
+   "skip": {
+    "n_plains": {
+     "cinchg": "Nothing to show in Northern Plains: no MLCIN changes of 25+ J/kg in unstable air in the last hour."
+    }
+   }
+  },
+  {
+   "id": "202606112330",
+   "label": "Thu Jun 11  6:30 PM CDT  (2330Z)",
+   "skip": {
+    "iowa": {
+     "lr75": "Nothing to show in Iowa: no 700-500 mb lapse rates of 7 C/km or more.",
+     "srh1obs": "Nothing to show in Iowa: no radar measures (or MesoXV has) 0-1 km SRH of 100+."
+    },
+    "n_plains": {
+     "cinchg": "Nothing to show in Northern Plains: no MLCIN changes of 25+ J/kg in unstable air in the last hour.",
+     "srh1obs": "Nothing to show in Northern Plains: no radar measures (or MesoXV has) 0-1 km SRH of 100+.",
+     "stp": "Nothing to show in Northern Plains: no STP of 0.5 or more.",
+     "tvis": "Nothing to show in Northern Plains: no STP of 0.5 or more, so no tornado environment to rate."
+    }
+   }
+  },
+  {
+   "id": "202606112345",
+   "label": "Thu Jun 11  6:45 PM CDT  (2345Z)",
+   "skip": {}
+  },
+  {
+   "id": "202606120000",
+   "label": "Thu Jun 11  7:00 PM CDT  (0000Z)",
+   "skip": {}
+  }
+ ],
+ "regions": [
+  {
+   "id": "plains",
+   "name": "Plains"
+  },
+  {
+   "id": "midwest",
+   "name": "Midwest"
+  },
+  {
+   "id": "iowa",
+   "name": "Iowa"
+  },
+  {
+   "id": "s_plains",
+   "name": "Southern Plains"
+  },
+  {
+   "id": "c_plains",
+   "name": "Central Plains"
+  },
+  {
+   "id": "n_plains",
+   "name": "Northern Plains"
+  },
+  {
+   "id": "ohio_valley",
+   "name": "Ohio Valley"
+  },
+  {
+   "id": "southeast",
+   "name": "Southeast"
+  }
+ ],
+ "products": [
+  {
+   "id": "sfc",
+   "name": "Surface: dewpoint, pressure, wind"
+  },
+  {
+   "id": "mfc",
+   "name": "Moisture convergence + surface wind"
+  },
+  {
+   "id": "pchg",
+   "name": "1-hour pressure change"
+  },
+  {
+   "id": "sbcape",
+   "name": "Surface-based CAPE + CIN"
+  },
+  {
+   "id": "mlcape",
+   "name": "Mixed-layer CAPE + CIN (100 mb)"
+  },
+  {
+   "id": "mucape",
+   "name": "Most-unstable CAPE"
+  },
+  {
+   "id": "capechg",
+   "name": "1-hour MLCAPE change"
+  },
+  {
+   "id": "cinchg",
+   "name": "1-hour MLCIN change (cap weakening)"
+  },
+  {
+   "id": "lcl",
+   "name": "Mixed-layer LCL height"
+  },
+  {
+   "id": "lr75",
+   "name": "700-500 mb lapse rate"
+  },
+  {
+   "id": "srh1",
+   "name": "0-1 km storm-relative helicity + Bunkers right mover"
+  },
+  {
+   "id": "srh1obs",
+   "name": "0-1 km SRH: radar-observed vs MesoXV"
+  },
+  {
+   "id": "srh3",
+   "name": "0-3 km storm-relative helicity + Bunkers right mover"
+  },
+  {
+   "id": "shear",
+   "name": "0-6 km bulk shear"
+  },
+  {
+   "id": "stp",
+   "name": "Significant tornado parameter (fixed layer)"
+  },
+  {
+   "id": "tvis",
+   "name": "Tornado visibility: HP / Classic / LP"
+  },
+  {
+   "id": "scp",
+   "name": "Supercell composite (fixed layer)"
+  }
+ ],
+ "updated": "2026-11-25T16:44:10Z",
+ "live": false
+}

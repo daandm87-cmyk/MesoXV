@@ -91,7 +91,7 @@ PRODUCTS = {
                  show=(lambda d: np.where(d["mlcape"] >= 100, d["srh1"], np.nan), 100,
                        "no 0-1 km SRH of 100+ where there's instability (MLCAPE 100+)")),
     "srh1obs": dict(title="0-1 km SRH: radar-observed vs MesoXV",
-                    units="Circles at radars: observed minus MesoXV 0-1 km SRH (m2/s2), number = observed  ·  orange = more than MesoXV has",
+                    units="At each radar: observed minus MesoXV 0-1 km SRH (m2/s2)  ·  + / orange = radar measures more than MesoXV has",
                     fill=(lambda d: d["srh1"], [50, 100, 150, 200, 250, 300, 400, 500, 600], "RdPu", "max"),
                     over=[("vad",), RADAR], show="vad"),
     "srh3": dict(title="0-3 km storm-relative helicity + Bunkers right mover", units="SRH 0-3 km (m2/s2)",
@@ -257,7 +257,7 @@ def render(d, grid, product, region, label, source):
                                 cmap=vcm, norm=vnorm, s=190, edgecolors=INK, linewidths=0.9,
                                 transform=HRRR_CRS, zorder=6)
                 for o in pts:
-                    ax.text(o["x"], o["y"], "  %d" % o["obs"], transform=HRRR_CRS, fontsize=8.5,
+                    ax.text(o["x"], o["y"], "  %+d" % o["diff"], transform=HRRR_CRS, fontsize=8.5,
                             fontweight="bold", color=INK, ha="left", va="center", zorder=7, clip_on=True,
                             path_effects=[pe.withStroke(linewidth=2.2, foreground="white")])
                 cs_override = (vs, vlev)

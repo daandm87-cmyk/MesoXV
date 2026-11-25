@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MesoXV</title>
+<style>
+:root{--navy:#1f2e3a;--navy2:#283c4b;--navy3:#2f4658;--line:#3a5168;--deep:#172430;
+--gold:#f1c40f;--ink:#d9d9d9;--muted:#aab6c0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--deep);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--navy);border-bottom:3px solid var(--gold);padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+h1{margin:0;font-size:22px;letter-spacing:.04em;color:var(--gold);font-weight:800}
+.sub{color:var(--muted);font-size:13px}
+#regions{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+button,.chip{background:var(--navy2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 10px;
+font:inherit;font-size:13px;cursor:pointer}
+button:hover{border-color:var(--gold)}
+.on{background:var(--gold)!important;color:var(--navy)!important;border-color:var(--gold)!important;font-weight:700}
+main{display:grid;grid-template-columns:250px 1fr;gap:14px;padding:14px;max-width:1500px;margin:0 auto}
+#products{display:flex;flex-direction:column;gap:4px}
+#products button{text-align:left}
+.group{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:10px 2px 2px}
+#map{width:100%;border-radius:10px;border:1px solid var(--line);background:#f4f2ee;display:block}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0}
+#slider{flex:1;min-width:200px;accent-color:var(--gold)}
+#time{font-weight:700;color:#fff;min-width:230px}
+.note{color:var(--muted);font-size:12.5px;margin-top:10px}
+@media (max-width:820px){main{grid-template-columns:1fr}#products{flex-direction:row;flex-wrap:wrap}.group{width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <h1>MesoXV</h1>
+  <span class="sub">15-minute mesoanalysis · RTMA surface + HRRR aloft</span>
+  <div id="regions"></div>
+</header>
+<main>
+  <nav id="products"></nav>
+  <section>
+    <div class="bar">
+      <button id="play">▶ Loop</button>
+      <button id="prev">◀</button>
+      <input id="slider" type="range" min="0" max="0" value="0">
+      <button id="next">▶</button>
+      <button id="latest">Latest</button>
+      <span id="time"></span>
+    </div>
+    <img id="map" alt="map">
+    <div id="missing" class="note" style="display:none;padding:40px;text-align:center;border:1px dashed var(--line);border-radius:10px">
+      This map isn't available for this time (the change maps need the frame from an hour earlier).</div>
+    <div class="note" id="note"></div>
+  </section>
+</main>
+<script>
+const GROUPS = {sfc:"Surface", mfc:"Surface", pchg:"Surface",
+  sbcape:"Instability", mlcape:"Instability", mucape:"Instability", capechg:"Instability",
+  cinchg:"Instability", lcl:"Instability", lr75:"Instability",
+  srh1:"Wind shear", srh3:"Wind shear", shear:"Wind shear", stp:"Composites", scp:"Composites"};
+let meta = null, region = null, product = null, idx = 0, timer = null, atLatest = true;
+const q = new URLSearchParams(location.hash.slice(1));
+const $ = s => document.querySelector(s);
+
+function img() {
+  if (!meta || !meta.frames.length) return;
+  const f = meta.frames[idx];
+  $("#map").style.display = ""; $("#missing").style.display = "none";
+  $("#map").src = `img/${f.id}/${region}/${product}.png`;
+  $("#time").textContent = f.label;
+  $("#slider").value = idx;
+  history.replaceState(null, "", `#r=${region}&p=${product}`);
+}
+function build() {
+  const R = $("#regions"); R.innerHTML = "";
+  meta.regions.forEach(r => {
+    const b = document.createElement("button"); b.textContent = r.name;
+    b.className = r.id === region ? "on" : ""; b.onclick = () => { region = r.id; build(); img(); }; R.appendChild(b);
+  });
+  const P = $("#products"); P.innerHTML = ""; let g = null;
+  meta.products.forEach(p => {
+    if (GROUPS[p.id] !== g) { g = GROUPS[p.id]; const h = document.createElement("div"); h.className = "group"; h.textContent = g; P.appendChild(h); }
+    const b = document.createElement("button"); b.textContent = p.name;
+    b.className = p.id === product ? "on" : ""; b.onclick = () => { product = p.id; build(); img(); }; P.appendChild(b);
+  });
+  $("#slider").max = meta.frames.length - 1;
+  $("#note").textContent = (meta.live ? "Live: a new frame every 15 minutes (each lands ~20 min after its time). " : "Replay. ") +
+    "Updated " + new Date(meta.updated).toLocaleString() + ".";
+}
+async function load(first) {
+  const r = await fetch("frames.json?" + Date.now()); meta = await r.json();
+  if (first) {
+    region = q.get("r") && meta.regions.some(x => x.id === q.get("r")) ? q.get("r") : meta.regions[0].id;
+    product = q.get("p") && meta.products.some(x => x.id === q.get("p")) ? q.get("p") : "stp";
+  }
+  if (first || atLatest) idx = meta.frames.length - 1;
+  build(); img();
+}
+$("#slider").oninput = e => { idx = +e.target.value; atLatest = idx === meta.frames.length - 1; img(); };
+$("#prev").onclick = () => { idx = Math.max(0, idx - 1); atLatest = false; img(); };
+$("#next").onclick = () => { idx = Math.min(meta.frames.length - 1, idx + 1); atLatest = idx === meta.frames.length - 1; img(); };
+$("#latest").onclick = () => { idx = meta.frames.length - 1; atLatest = true; img(); };
+$("#play").onclick = () => {
+  if (timer) { clearInterval(timer); timer = null; $("#play").textContent = "▶ Loop"; return; }
+  $("#play").textContent = "❚❚ Stop";
+  timer = setInterval(() => { idx = (idx + 1) % meta.frames.length; img(); }, 700);
+};
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") $("#prev").click();
+  if (e.key === "ArrowRight") $("#next").click();
+});
+$("#map").onerror = () => { $("#map").style.display = "none"; $("#missing").style.display = ""; };
+load(true);
+setInterval(() => { if (meta && meta.live) load(false); }, 120000);
+</script>
+</body>
+</html>

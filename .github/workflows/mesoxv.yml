@@ -1,0 +1,86 @@
+name: MesoXV
+
+# Started on demand: "Run workflow" on GitHub, or the Run button in the Command Center.
+# Live: a new frame every 15 minutes for `hours` (one job lasts at most ~5.25 h; longer
+# runs hand over to a fresh job automatically). Replay: draw a past day once.
+on:
+  workflow_dispatch:
+    inputs:
+      hours:
+        description: "Live: how many hours to keep updating (up to 12)"
+        required: false
+        default: "6"
+      replay:
+        description: "Replay a past day instead, UTC start/end, e.g. 2026-04-17T19:00/2026-04-18T01:00"
+        required: false
+        default: ""
+      regions:
+        description: "Regions (blank = all): plains,midwest,iowa,s_plains,c_plains,n_plains,ohio_valley,southeast"
+        required: false
+        default: ""
+
+permissions:
+  contents: write     # push the site to gh-pages
+  actions: write      # hand a long live run over to the next job
+
+concurrency:
+  group: mesoxv
+  cancel-in-progress: false
+
+jobs:
+  maps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: System libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libeccodes0 libgeos-dev libproj-dev
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install Python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Keep the frames already on the site (live)
+        if: ${{ github.event.inputs.replay == '' }}
+        run: |
+          git clone -q --depth 1 -b gh-pages "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" site \
+            || mkdir -p site
+          rm -rf site/.git
+
+      - name: Make the maps
+        env:
+          OUT: ${{ github.workspace }}/site
+          GITHUB_TOKEN: ${{ github.token }}
+          MESOXV_PUBLISH: bash ${{ github.workspace }}/publish.sh
+          HOURS: ${{ github.event.inputs.hours }}
+          REPLAY: ${{ github.event.inputs.replay }}
+          REGIONS: ${{ github.event.inputs.regions }}
+        run: |
+          ARGS=(--out "$OUT" --workers 3)
+          if [ -n "$REGIONS" ]; then ARGS+=(--regions "$REGIONS"); fi
+          if [ -n "$REPLAY" ]; then
+            rm -rf "$OUT"
+            python -W ignore run.py --start "${REPLAY%/*}" --end "${REPLAY#*/}" "${ARGS[@]}"
+          else
+            H=$(python -c "print(min(float('${HOURS:-6}' or 6), 12.0))")
+            THIS=$(python -c "print(min($H, 5.25))")
+            echo "LEFT=$(python -c "print(round($H - $THIS, 2))")" >> "$GITHUB_ENV"
+            python -W ignore run.py --live --hours "$THIS" "${ARGS[@]}"
+          fi
+
+      - name: Hand over to a fresh job (long live runs)
+        if: ${{ github.event.inputs.replay == '' && env.LEFT != '' && env.LEFT != '0' && env.LEFT != '0.0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run mesoxv.yml --ref "${GITHUB_REF_NAME}" -f hours="$LEFT" -f regions="${{ github.event.inputs.regions }}"

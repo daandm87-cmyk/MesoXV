@@ -1,0 +1,9 @@
+.venv/
+cache/
+__pycache__/
+*.log
+docs/
+test_out/
+CLAUDE.md
+live_test/
+*.bak

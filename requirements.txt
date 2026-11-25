@@ -1,0 +1,10 @@
+# Pinned to the versions tested on 2026-11-24 (same pins as Storm Organization
+# where shared). Upgrade deliberately, then re-run check_model.py and check_metpy.py.
+eccodes==2.50.1
+numpy==2.5.5
+scipy==1.18.1
+matplotlib==3.11.2
+cartopy==0.26.0
+shapely==2.2.0
+pyproj==3.8.0
+pillow==13.0.0

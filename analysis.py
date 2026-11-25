@@ -321,6 +321,7 @@ def analyse(sfc, prof, dx):
     out["t2"], out["td2"] = sfc["t"], td_from_q(sfc["q"], sfc["p"])
     out["u10"], out["v10"] = sfc["u"], sfc["v"]
     out["psfc"] = sfc["p"]
+    out["zs"] = sfc["zs"]
     out["mslp"] = gaussian_filter(mslp(sfc["p"], sfc["t"], sfc["zs"]), 2)
     out["mfc"] = mfc(sfc["q"], sfc["u"], sfc["v"], dx)
     t5 = interp_at_p(col["t"], col["p"], np.full_like(sfc["p"], 500.0))

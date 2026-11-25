@@ -1,0 +1,938 @@
+[
+{
+"id": "ABC",
+"lat": 60.7919,
+"lon": -161.8764,
+"name": "Bethel"
+},
+{
+"id": "ABR",
+"lat": 45.4558,
+"lon": -98.413,
+"name": "Aberdeen"
+},
+{
+"id": "ABX",
+"lat": 35.1497,
+"lon": -106.8239,
+"name": "Albuquerque"
+},
+{
+"id": "ACG",
+"lat": 56.8528,
+"lon": -135.5291,
+"name": "Sitka"
+},
+{
+"id": "AEC",
+"lat": 64.5114,
+"lon": -165.295,
+"name": "Nome"
+},
+{
+"id": "AHG",
+"lat": 60.7259,
+"lon": -151.3514,
+"name": "Kenai"
+},
+{
+"id": "AIH",
+"lat": 59.4619,
+"lon": -146.3011,
+"name": "Middleton Island"
+},
+{
+"id": "AKC",
+"lat": 58.6794,
+"lon": -156.6294,
+"name": "King Salmon"
+},
+{
+"id": "AKQ",
+"lat": 36.9839,
+"lon": -77.0075,
+"name": "Norfolk"
+},
+{
+"id": "AMA",
+"lat": 35.2333,
+"lon": -101.7093,
+"name": "Amarillo"
+},
+{
+"id": "AMX",
+"lat": 25.6105,
+"lon": -80.413,
+"name": "Miami"
+},
+{
+"id": "APD",
+"lat": 65.0351,
+"lon": -147.5014,
+"name": "Fairbanks Faa"
+},
+{
+"id": "APX",
+"lat": 44.9063,
+"lon": -84.7195,
+"name": "NCL Michigan"
+},
+{
+"id": "ARX",
+"lat": 43.8228,
+"lon": -91.1911,
+"name": "La Crosse"
+},
+{
+"id": "ATX",
+"lat": 48.1946,
+"lon": -122.4957,
+"name": "Seattle"
+},
+{
+"id": "BBX",
+"lat": 39.4961,
+"lon": -121.6316,
+"name": "Beale AFB"
+},
+{
+"id": "BGM",
+"lat": 42.1997,
+"lon": -75.9847,
+"name": "Binghamton"
+},
+{
+"id": "BHX",
+"lat": 40.4983,
+"lon": -124.2922,
+"name": "Eureka (Bunker Hill)"
+},
+{
+"id": "BIS",
+"lat": 46.7708,
+"lon": -100.7603,
+"name": "Bismarck"
+},
+{
+"id": "BLX",
+"lat": 45.8538,
+"lon": -108.6068,
+"name": "Billings"
+},
+{
+"id": "BMX",
+"lat": 33.1719,
+"lon": -86.7697,
+"name": "Birmingham"
+},
+{
+"id": "BOX",
+"lat": 41.9558,
+"lon": -71.1369,
+"name": "Boston"
+},
+{
+"id": "BRO",
+"lat": 25.9155,
+"lon": -97.4186,
+"name": "Brownsville"
+},
+{
+"id": "BUF",
+"lat": 42.9486,
+"lon": -78.7369,
+"name": "Buffalo"
+},
+{
+"id": "BYX",
+"lat": 24.5969,
+"lon": -81.7033,
+"name": "Key West"
+},
+{
+"id": "CAE",
+"lat": 33.9486,
+"lon": -81.1186,
+"name": "Columbia"
+},
+{
+"id": "CBW",
+"lat": 46.0392,
+"lon": -67.8064,
+"name": "Caribou"
+},
+{
+"id": "CBX",
+"lat": 43.4902,
+"lon": -116.236,
+"name": "Boise"
+},
+{
+"id": "CCX",
+"lat": 40.9231,
+"lon": -78.0039,
+"name": "State College"
+},
+{
+"id": "CLE",
+"lat": 41.413,
+"lon": -81.86,
+"name": "Cleveland"
+},
+{
+"id": "CLX",
+"lat": 32.6555,
+"lon": -81.0422,
+"name": "Charleston,SC"
+},
+{
+"id": "CRP",
+"lat": 27.7839,
+"lon": -97.5108,
+"name": "Corpus Christi"
+},
+{
+"id": "CXX",
+"lat": 44.5111,
+"lon": -73.1664,
+"name": "Burlington"
+},
+{
+"id": "CYS",
+"lat": 41.1519,
+"lon": -104.8061,
+"name": "Cheyenne"
+},
+{
+"id": "DAX",
+"lat": 38.5011,
+"lon": -121.6778,
+"name": "Sacramento"
+},
+{
+"id": "DDC",
+"lat": 37.7608,
+"lon": -99.9689,
+"name": "Dodge City"
+},
+{
+"id": "DFX",
+"lat": 29.2725,
+"lon": -100.2803,
+"name": "Laughlin AFB"
+},
+{
+"id": "DGX",
+"lat": 32.28,
+"lon": -89.9844,
+"name": "Jackson/Brandon,MS"
+},
+{
+"id": "DIX",
+"lat": 39.9469,
+"lon": -74.4107,
+"name": "Philadelphia"
+},
+{
+"id": "DLH",
+"lat": 46.8369,
+"lon": -92.2097,
+"name": "Duluth"
+},
+{
+"id": "DMX",
+"lat": 41.7311,
+"lon": -93.7228,
+"name": "Des Moines"
+},
+{
+"id": "DOX",
+"lat": 38.8255,
+"lon": -75.44,
+"name": "Dover AFB"
+},
+{
+"id": "DTX",
+"lat": 42.7,
+"lon": -83.4717,
+"name": "Detroit"
+},
+{
+"id": "DVN",
+"lat": 41.6117,
+"lon": -90.5808,
+"name": "Quad Cities"
+},
+{
+"id": "DYX",
+"lat": 32.5383,
+"lon": -99.2542,
+"name": "Dyess AFB"
+},
+{
+"id": "EAX",
+"lat": 38.8102,
+"lon": -94.2645,
+"name": "Pleasant Hill"
+},
+{
+"id": "EMX",
+"lat": 31.8936,
+"lon": -110.6303,
+"name": "Tucson"
+},
+{
+"id": "ENX",
+"lat": 42.5866,
+"lon": -74.0641,
+"name": "Albany"
+},
+{
+"id": "EOX",
+"lat": 31.4606,
+"lon": -85.4594,
+"name": "Ft Rucker"
+},
+{
+"id": "EPZ",
+"lat": 31.873,
+"lon": -106.698,
+"name": "El Paso"
+},
+{
+"id": "ESX",
+"lat": 35.7011,
+"lon": -114.8914,
+"name": "Las Vegas"
+},
+{
+"id": "EVX",
+"lat": 30.565,
+"lon": -85.9217,
+"name": "Eglin Afb"
+},
+{
+"id": "EWX",
+"lat": 29.704,
+"lon": -98.0286,
+"name": "Austin/San Antonio"
+},
+{
+"id": "EYX",
+"lat": 35.0978,
+"lon": -117.5607,
+"name": "Edwards AFB"
+},
+{
+"id": "FCX",
+"lat": 37.0242,
+"lon": -80.2742,
+"name": "Roanoke"
+},
+{
+"id": "FDR",
+"lat": 34.3622,
+"lon": -98.9767,
+"name": "Altus AFB"
+},
+{
+"id": "FDX",
+"lat": 34.6342,
+"lon": -103.6189,
+"name": "Cannon AFB"
+},
+{
+"id": "FFC",
+"lat": 33.3633,
+"lon": -84.5658,
+"name": "Atlanta"
+},
+{
+"id": "FSD",
+"lat": 43.5878,
+"lon": -96.7289,
+"name": "Sioux Falls"
+},
+{
+"id": "FSX",
+"lat": 34.5743,
+"lon": -111.1984,
+"name": "Flagstaff"
+},
+{
+"id": "FTG",
+"lat": 39.7866,
+"lon": -104.5458,
+"name": "Denver"
+},
+{
+"id": "FWS",
+"lat": 32.5728,
+"lon": -97.3031,
+"name": "Dallas/Ft Worth"
+},
+{
+"id": "GGW",
+"lat": 48.2064,
+"lon": -106.6247,
+"name": "Glasgow"
+},
+{
+"id": "GJX",
+"lat": 39.0622,
+"lon": -108.2138,
+"name": "Grand Junction"
+},
+{
+"id": "GLD",
+"lat": 39.3669,
+"lon": -101.7003,
+"name": "Goodland"
+},
+{
+"id": "GRB",
+"lat": 44.4986,
+"lon": -88.1111,
+"name": "Green Bay"
+},
+{
+"id": "GRK",
+"lat": 30.7217,
+"lon": -97.3828,
+"name": "Ft Hood"
+},
+{
+"id": "GRR",
+"lat": 42.8939,
+"lon": -85.5449,
+"name": "Grand Rapids"
+},
+{
+"id": "GSP",
+"lat": 34.8833,
+"lon": -82.2198,
+"name": "Greer"
+},
+{
+"id": "GUA",
+"lat": 13.4558,
+"lon": 144.8111,
+"name": "Andersen AFB"
+},
+{
+"id": "GWX",
+"lat": 33.8969,
+"lon": -88.3292,
+"name": "Columbus AFB"
+},
+{
+"id": "GYX",
+"lat": 43.8913,
+"lon": -70.2564,
+"name": "Portland,ME"
+},
+{
+"id": "HDC",
+"lat": 30.5196,
+"lon": -90.4074,
+"name": "Hammond"
+},
+{
+"id": "HDX",
+"lat": 33.077,
+"lon": -106.12,
+"name": "Holloman AFB"
+},
+{
+"id": "HGX",
+"lat": 29.4719,
+"lon": -95.0789,
+"name": "Houston"
+},
+{
+"id": "HKI",
+"lat": 21.8939,
+"lon": -159.5525,
+"name": "South Kauai"
+},
+{
+"id": "HKM",
+"lat": 20.1253,
+"lon": -155.7778,
+"name": "Kamuela/Kohala Apt"
+},
+{
+"id": "HMO",
+"lat": 21.1328,
+"lon": -157.1803,
+"name": "Molokai"
+},
+{
+"id": "HNX",
+"lat": 36.3142,
+"lon": -119.6321,
+"name": "San Joaquin Valley"
+},
+{
+"id": "HPX",
+"lat": 36.7367,
+"lon": -87.285,
+"name": "Ft Campbell"
+},
+{
+"id": "HTX",
+"lat": 34.9305,
+"lon": -86.0836,
+"name": "Northeast Alabama"
+},
+{
+"id": "HWA",
+"lat": 19.095,
+"lon": -155.5689,
+"name": "South Shore"
+},
+{
+"id": "ICT",
+"lat": 37.6544,
+"lon": -97.443,
+"name": "Wichita"
+},
+{
+"id": "ICX",
+"lat": 37.591,
+"lon": -112.8622,
+"name": "Cedar City"
+},
+{
+"id": "ILN",
+"lat": 39.4203,
+"lon": -83.8217,
+"name": "Cincinnati"
+},
+{
+"id": "ILX",
+"lat": 40.1505,
+"lon": -89.3368,
+"name": "Lincoln"
+},
+{
+"id": "IND",
+"lat": 39.7075,
+"lon": -86.2803,
+"name": "Indianapolis"
+},
+{
+"id": "INX",
+"lat": 36.175,
+"lon": -95.5641,
+"name": "Tulsa"
+},
+{
+"id": "IWA",
+"lat": 33.2892,
+"lon": -111.67,
+"name": "Phoenix"
+},
+{
+"id": "IWX",
+"lat": 41.3586,
+"lon": -85.7,
+"name": "Northern Indiana"
+},
+{
+"id": "JAX",
+"lat": 30.4846,
+"lon": -81.7019,
+"name": "Jacksonville"
+},
+{
+"id": "JGX",
+"lat": 32.675,
+"lon": -83.3511,
+"name": "Robins AFB"
+},
+{
+"id": "JKL",
+"lat": 37.5908,
+"lon": -83.3131,
+"name": "Jackson,KY"
+},
+{
+"id": "JUA",
+"lat": 18.1157,
+"lon": -66.0782,
+"name": "San Juan"
+},
+{
+"id": "LBB",
+"lat": 33.6541,
+"lon": -101.8142,
+"name": "Lubbock"
+},
+{
+"id": "LCH",
+"lat": 30.1253,
+"lon": -93.2159,
+"name": "Lake Charles"
+},
+{
+"id": "LGX",
+"lat": 47.1169,
+"lon": -124.1066,
+"name": "Langley Hill"
+},
+{
+"id": "LNX",
+"lat": 41.9579,
+"lon": -100.5762,
+"name": "North Platte"
+},
+{
+"id": "LOT",
+"lat": 41.6044,
+"lon": -88.0844,
+"name": "Chicago"
+},
+{
+"id": "LRX",
+"lat": 40.7397,
+"lon": -116.8028,
+"name": "Elko"
+},
+{
+"id": "LSX",
+"lat": 38.6989,
+"lon": -90.6828,
+"name": "St Louis"
+},
+{
+"id": "LTX",
+"lat": 33.9892,
+"lon": -78.4292,
+"name": "Wilmington"
+},
+{
+"id": "LVX",
+"lat": 37.9753,
+"lon": -85.9439,
+"name": "Louisville"
+},
+{
+"id": "LWX",
+"lat": 38.9761,
+"lon": -77.4875,
+"name": "Sterling"
+},
+{
+"id": "LZK",
+"lat": 34.8364,
+"lon": -92.2619,
+"name": "Little Rock"
+},
+{
+"id": "MAF",
+"lat": 31.9435,
+"lon": -102.1892,
+"name": "Midland/Odessa"
+},
+{
+"id": "MAX",
+"lat": 42.0811,
+"lon": -122.7173,
+"name": "Medford"
+},
+{
+"id": "MBX",
+"lat": 48.3925,
+"lon": -100.8644,
+"name": "Minot AFB"
+},
+{
+"id": "MHX",
+"lat": 34.7758,
+"lon": -76.8764,
+"name": "Morehead City"
+},
+{
+"id": "MKX",
+"lat": 42.9678,
+"lon": -88.5506,
+"name": "Milwaukee"
+},
+{
+"id": "MLB",
+"lat": 28.1131,
+"lon": -80.6544,
+"name": "Melbourne"
+},
+{
+"id": "MOB",
+"lat": 30.6794,
+"lon": -88.2397,
+"name": "Mobile"
+},
+{
+"id": "MPX",
+"lat": 44.8489,
+"lon": -93.5655,
+"name": "Minneapolis"
+},
+{
+"id": "MQT",
+"lat": 46.5311,
+"lon": -87.5483,
+"name": "Marquette"
+},
+{
+"id": "MRX",
+"lat": 36.1683,
+"lon": -83.4019,
+"name": "Knoxville"
+},
+{
+"id": "MSX",
+"lat": 47.0411,
+"lon": -113.9861,
+"name": "Missoula"
+},
+{
+"id": "MTX",
+"lat": 41.2628,
+"lon": -112.4478,
+"name": "Salt Lake City"
+},
+{
+"id": "MUX",
+"lat": 37.1552,
+"lon": -121.8984,
+"name": "San Francisco"
+},
+{
+"id": "MVX",
+"lat": 47.5281,
+"lon": -97.325,
+"name": "Fargo/Grand Forks"
+},
+{
+"id": "MXX",
+"lat": 32.5366,
+"lon": -85.7897,
+"name": "Maxwell AFB"
+},
+{
+"id": "NKX",
+"lat": 32.9189,
+"lon": -117.0419,
+"name": "San Diego"
+},
+{
+"id": "NQA",
+"lat": 35.3447,
+"lon": -89.8733,
+"name": "Memphis"
+},
+{
+"id": "OAX",
+"lat": 41.3203,
+"lon": -96.3668,
+"name": "Omaha"
+},
+{
+"id": "OHX",
+"lat": 36.2472,
+"lon": -86.5625,
+"name": "Nashville"
+},
+{
+"id": "OKX",
+"lat": 40.8655,
+"lon": -72.8639,
+"name": "Brookhaven"
+},
+{
+"id": "OTX",
+"lat": 47.6805,
+"lon": -117.6258,
+"name": "Spokane"
+},
+{
+"id": "PAH",
+"lat": 37.0683,
+"lon": -88.7719,
+"name": "Paducah"
+},
+{
+"id": "PBZ",
+"lat": 40.5317,
+"lon": -80.2179,
+"name": "Pittsburgh"
+},
+{
+"id": "PDT",
+"lat": 45.6906,
+"lon": -118.8529,
+"name": "Pendleton"
+},
+{
+"id": "POE",
+"lat": 31.1553,
+"lon": -92.9758,
+"name": "Ft Polk"
+},
+{
+"id": "PUX",
+"lat": 38.4594,
+"lon": -104.1814,
+"name": "Pueblo"
+},
+{
+"id": "RAX",
+"lat": 35.6653,
+"lon": -78.49,
+"name": "Raleigh/Durham"
+},
+{
+"id": "RGX",
+"lat": 39.754,
+"lon": -119.462,
+"name": "Reno"
+},
+{
+"id": "RIW",
+"lat": 43.0661,
+"lon": -108.4773,
+"name": "Riverton/Lander"
+},
+{
+"id": "RLX",
+"lat": 38.3111,
+"lon": -81.7228,
+"name": "Charleston,WV"
+},
+{
+"id": "RTX",
+"lat": 45.715,
+"lon": -122.965,
+"name": "Portland,OR"
+},
+{
+"id": "SFX",
+"lat": 43.1056,
+"lon": -112.6861,
+"name": "Pocatello"
+},
+{
+"id": "SGF",
+"lat": 37.2353,
+"lon": -93.4003,
+"name": "Springfield"
+},
+{
+"id": "SHV",
+"lat": 32.4508,
+"lon": -93.8412,
+"name": "Shreveport"
+},
+{
+"id": "SJT",
+"lat": 31.3711,
+"lon": -100.4922,
+"name": "San Angelo"
+},
+{
+"id": "SOX",
+"lat": 33.8177,
+"lon": -117.636,
+"name": "Santa Ana Mts"
+},
+{
+"id": "SRX",
+"lat": 35.2904,
+"lon": -94.3619,
+"name": "Western Arkansas"
+},
+{
+"id": "TBW",
+"lat": 27.7053,
+"lon": -82.4019,
+"name": "Tampa"
+},
+{
+"id": "TFX",
+"lat": 47.4597,
+"lon": -111.3853,
+"name": "Great Falls"
+},
+{
+"id": "TLH",
+"lat": 30.3975,
+"lon": -84.3289,
+"name": "Tallahassee"
+},
+{
+"id": "TLX",
+"lat": 35.3331,
+"lon": -97.2777,
+"name": "Norman"
+},
+{
+"id": "TWX",
+"lat": 38.9969,
+"lon": -96.2325,
+"name": "Topeka"
+},
+{
+"id": "TYX",
+"lat": 43.7558,
+"lon": -75.68,
+"name": "Ft Drum"
+},
+{
+"id": "UDX",
+"lat": 44.1247,
+"lon": -102.83,
+"name": "Rapid City"
+},
+{
+"id": "UEX",
+"lat": 40.3208,
+"lon": -98.4419,
+"name": "Grand Island"
+},
+{
+"id": "VAX",
+"lat": 30.8903,
+"lon": -83.0018,
+"name": "Moody AFB"
+},
+{
+"id": "VBX",
+"lat": 34.8385,
+"lon": -120.3979,
+"name": "Vandenberg AFB"
+},
+{
+"id": "VNX",
+"lat": 36.7408,
+"lon": -98.1275,
+"name": "Vance AFB"
+},
+{
+"id": "VTX",
+"lat": 34.4117,
+"lon": -119.1786,
+"name": "Los Angeles"
+},
+{
+"id": "VWX",
+"lat": 38.2602,
+"lon": -87.7245,
+"name": "Evansville,IN"
+},
+{
+"id": "YUX",
+"lat": 32.4953,
+"lon": -114.6567,
+"name": "Yuma"
+}
+]

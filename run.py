@@ -51,19 +51,29 @@ def _render_frame(args):
     frame_d, grid, valid, regions, products, out = args
     import render
     done = 0
-    src = "RTMA Rapid Update %sZ analysis + HRRR %sZ run  ·  MesoXV" % (
-        valid.strftime("%H%M"), frame_d["_run"].strftime("%H"))
+    src = "RTMA Rapid Update %sZ analysis + HRRR %sZ run" % (valid.strftime("%H%M"), frame_d["_run"].strftime("%H"))
+    if frame_d.get("_refl_time") is not None:
+        src += "  ·  radar outlines 35/50 dBZ: MRMS %sZ" % frame_d["_refl_time"].strftime("%H%M")
+    src += "  ·  MesoXV"
+    base = os.path.join(out, "img", valid.strftime("%Y%m%d%H%M"))
+    skipped = {}
     for reg in regions:
-        folder = os.path.join(out, "img", valid.strftime("%Y%m%d%H%M"), reg)
+        folder = os.path.join(base, reg)
         os.makedirs(folder, exist_ok=True)
         for prod in products:
-            spec = render.PRODUCTS[prod]
-            if spec.get("needs") and spec["needs"] not in frame_d:
+            ok, why = render.worth_showing(frame_d, grid, prod, reg)
+            path = os.path.join(folder, prod + ".png")
+            if not ok:                      # nothing worth drawing: say why on the page instead
+                skipped.setdefault(reg, {})[prod] = why
+                if os.path.exists(path):
+                    os.remove(path)
                 continue
             png = render.render(frame_d, grid, prod, reg, label(valid), src)
-            with open(os.path.join(folder, prod + ".png"), "wb") as fh:
+            with open(path, "wb") as fh:
                 fh.write(png)
             done += 1
+    with open(os.path.join(base, "skip.json"), "w", encoding="utf-8") as fh:
+        json.dump(skipped, fh)
     return valid, done
 
 
@@ -91,8 +101,16 @@ def add_tendencies(d, past):
 def write_index(out, regions, products, live):
     import render
     frames = sorted(n for n in os.listdir(os.path.join(out, "img")) if n.isdigit())
+
+    def skips(f):
+        try:
+            with open(os.path.join(out, "img", f, "skip.json"), encoding="utf-8") as fh:
+                return json.load(fh)
+        except (OSError, ValueError):
+            return {}
     meta = {
-        "frames": [{"id": f, "label": label(dt.datetime.strptime(f, "%Y%m%d%H%M"))} for f in frames],
+        "frames": [{"id": f, "label": label(dt.datetime.strptime(f, "%Y%m%d%H%M")), "skip": skips(f)}
+                   for f in frames],
         "regions": [{"id": r, "name": render.REGIONS[r][0]} for r in regions],
         "products": [{"id": p, "name": render.PRODUCTS[p]["title"]} for p in products],
         "updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),

@@ -16,6 +16,7 @@ h1{margin:0;font-size:22px;letter-spacing:.04em;color:var(--gold);font-weight:80
 button,.chip{background:var(--navy2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 10px;
 font:inherit;font-size:13px;cursor:pointer}
 button:hover{border-color:var(--gold)}
+.dim{opacity:.45}
 .on{background:var(--gold)!important;color:var(--navy)!important;border-color:var(--gold)!important;font-weight:700}
 main{display:grid;grid-template-columns:250px 1fr;gap:14px;padding:14px;max-width:1500px;margin:0 auto}
 #products{display:flex;flex-direction:column;gap:4px}
@@ -63,7 +64,7 @@ header{padding:8px 12px}h1{font-size:19px}.sub{display:none}#time{min-width:0;wi
 const GROUPS = {sfc:"Surface", mfc:"Surface", pchg:"Surface",
   sbcape:"Instability", mlcape:"Instability", mucape:"Instability", capechg:"Instability",
   cinchg:"Instability", lcl:"Instability", lr75:"Instability",
-  srh1:"Wind shear", srh3:"Wind shear", shear:"Wind shear", stp:"Composites", scp:"Composites"};
+  srh1:"Wind shear", srh1obs:"Wind shear", srh3:"Wind shear", shear:"Wind shear", stp:"Composites", scp:"Composites"};
 let meta = null, region = null, product = null, idx = 0, timer = null, atLatest = true;
 const q = new URLSearchParams(location.hash.slice(1));
 const $ = s => document.querySelector(s);
@@ -71,8 +72,19 @@ const $ = s => document.querySelector(s);
 function img() {
   if (!meta || !meta.frames.length) return;
   const f = meta.frames[idx];
-  $("#map").style.display = ""; $("#missing").style.display = "none";
-  $("#map").src = `img/${f.id}/${region}/${product}.png`;
+  const skip = (f.skip && f.skip[region]) || {};
+  if (skip[product]) {                         // nothing worth drawing: say why
+    $("#map").style.display = "none"; $("#missing").style.display = "";
+    $("#missing").textContent = skip[product];
+  } else {
+    $("#map").style.display = ""; $("#missing").style.display = "none";
+    $("#map").src = `img/${f.id}/${region}/${product}.png`;
+  }
+  document.querySelectorAll("#products button").forEach(b => b.classList.toggle("dim", !!skip[b.dataset.id]));
+  document.querySelectorAll("#psel option").forEach(o => {
+    const p = meta.products.find(x => x.id === o.value);
+    o.textContent = p.name + (skip[o.value] ? "  (nothing now)" : "");
+  });
   $("#time").textContent = f.label;
   $("#slider").value = idx;
   history.replaceState(null, "", `#r=${region}&p=${product}`);
@@ -86,7 +98,7 @@ function build() {
   const P = $("#products"); P.innerHTML = ""; let g = null;
   meta.products.forEach(p => {
     if (GROUPS[p.id] !== g) { g = GROUPS[p.id]; const h = document.createElement("div"); h.className = "group"; h.textContent = g; P.appendChild(h); }
-    const b = document.createElement("button"); b.textContent = p.name;
+    const b = document.createElement("button"); b.textContent = p.name; b.dataset.id = p.id;
     b.className = p.id === product ? "on" : ""; b.onclick = () => { product = p.id; build(); img(); }; P.appendChild(b);
   });
   const rs = $("#rsel"), ps = $("#psel");
@@ -125,7 +137,10 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowLeft") $("#prev").click();
   if (e.key === "ArrowRight") $("#next").click();
 });
-$("#map").onerror = () => { $("#map").style.display = "none"; $("#missing").style.display = ""; };
+$("#map").onerror = () => {
+  $("#map").style.display = "none"; $("#missing").style.display = "";
+  $("#missing").textContent = "This map isn't available for this time.";
+};
 load(true);
 setInterval(() => { if (meta && meta.live) load(false); }, 120000);
 </script>

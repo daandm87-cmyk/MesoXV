@@ -8,6 +8,8 @@ import numpy as np
 import data
 import grids
 import analysis as an
+import mrms
+import vad
 
 PRS_LEVELS = [1000, 975, 950, 925, 900, 875, 850, 800, 750, 700, 650, 600, 550, 500,
               450, 400, 350, 300, 250, 200, 150, 100]
@@ -169,6 +171,19 @@ def make_frame(inp: Inputs, valid: dt.datetime, model_only=False):
     out = an.analyse(s, prof, g.dx)
     out["_run"] = run
     out["_check"] = check
+    if not model_only:
+        # radar context and observed low-level shear: never let these stop a frame
+        try:
+            got = mrms.reflectivity(valid, g)
+            if got is not None:
+                out["refl"], out["_refl_time"] = got
+        except Exception as e:
+            print("   radar reflectivity unavailable: %s" % e, flush=True)
+        try:
+            out["_vad"] = vad.observe(valid, g, out)
+        except Exception as e:
+            print("   radar wind profiles unavailable: %s" % e, flush=True)
+            out["_vad"] = []
     return out
 
 

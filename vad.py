@@ -29,6 +29,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RADARS = json.load(open(os.path.join(HERE, "radars.json"), encoding="utf-8"))
 MAX_AGE = dt.timedelta(minutes=12)      # profile at most this much older than the frame
 MIN_TOP_M = 850.0                       # need VAD winds up to at least this height AGL
+CLUTTER_SFC_MIN = 5.0                   # m/s (~10 kt): clutter check only over a breezy surface
+CLUTTER_FRAC = 0.5                      # ...where a level below 1 km slower than half of it
+CLUTTER_ABS = 2.0                       # ...(and at least 2 m/s, ~4 kt) is treated as clutter
 ROW = re.compile(r"(\d{3})\s+(-?\d+\.\d|NA)\s+(-?\d+\.\d|NA)\s+(-?\d+\.\d|NA)\s+(\d{3})\s+(\d{3})")
 
 _lists = {}
@@ -111,6 +114,14 @@ def observe(valid, grid, d):
         t, rows = got
         zs = float(d["zs"][j, i])
         lev = sorted((alt - zs, u, v) for alt, u, v in rows if 0 < alt - zs <= 1600)
+        # Clutter check: near-calm radar levels over a breezy surface aren't weather.
+        # Behind an evening cold front the beam bends into the ground (anomalous
+        # propagation) and stationary ground echoes give a clean, low-RMS fit of ~0 wind
+        # (Hastings, 2026-04-17 22-00Z: 1-3 kt at 0.2-0.8 km under a 22 kt surface wind).
+        spd10 = float(np.hypot(d["u10"][j, i], d["v10"][j, i]))
+        if spd10 >= CLUTTER_SFC_MIN:
+            floor = max(CLUTTER_ABS, CLUTTER_FRAC * spd10)
+            lev = [l for l in lev if l[0] > 1000 or np.hypot(l[1], l[2]) >= floor]
         if len([l for l in lev if l[0] <= 1000]) < 2 or max((l[0] for l in lev), default=0) < MIN_TOP_M:
             return None
         h = np.array([0.0] + [l[0] for l in lev])

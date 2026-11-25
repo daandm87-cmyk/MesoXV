@@ -25,6 +25,14 @@ MU_DEPTH_HPA = 300.0         # most-unstable parcel searched in the lowest 300 h
 PBL_MIN_M = 150.0            # surface correction reaches at least this high
 PBL_TAPER = 0.5              # ...and fades out over another half PBL depth above it
 
+# Tornado visibility: Daan's LP / Classic / HP index from Tornado Visibility
+# (C:\Tornado_Visibility\chase_beauty.py). Keep these in step with that file.
+TV_SR_FLOOR_KT, TV_SR_CEIL_KT = 40.0, 60.0       # anvil (300 mb) storm-relative wind: HP -> LP
+TV_LLSR_FLOOR_KT, TV_LLSR_CEIL_KT = 20.0, 50.0   # 10 m storm-relative inflow: second pathway
+TV_PW_NEUTRAL_IN, TV_PW_DRY_IN, TV_PW_WET_IN, TV_PW_WEIGHT = 1.5, 1.0, 0.5, 0.12
+TV_CA_OROG_MAX = 1200.0                          # critical angle not shown above this terrain (m)
+KT_PER_MS = 1.943844
+
 
 # ------------------------------------------------------------------ moisture
 def es_hpa(t):
@@ -329,4 +337,41 @@ def analyse(sfc, prof, dx):
     z5 = interp_at_p(col["z"], col["p"], np.full_like(sfc["p"], 500.0))
     z7 = interp_at_p(col["z"], col["p"], np.full_like(sfc["p"], 700.0))
     out["lr75"] = (t7 - t5) / np.maximum(z5 - z7, 1) * 1000          # 700-500 hPa lapse rate, C/km
+    out.update(visibility(col, hs, u, v, cu, cv, sfc["zs"]))
     return {k: np.asarray(a, np.float32) for k, a in out.items()}
+
+
+def precipitable_water(col):
+    """kg/m2 (= mm) from the surface to the top level (100 hPa). Below-ground levels
+    are zero-thickness copies of the surface, so they add nothing."""
+    p, q = col["p"] * 100.0, col["q"]
+    return (0.5 * (q[1:] + q[:-1]) * (p[:-1] - p[1:])).sum(0) / G
+
+
+def visibility(col, hs, u, v, cu, cv, zs):
+    """Tornado Visibility's mode index (0 = HP, 0.5 = Classic, 1 = LP) and critical angle,
+    with MesoXV's inputs: the RTMA 10 m wind, MesoXV's Bunkers motion (SPC convention, not
+    HRRR's own storm motion), HRRR's 300 mb wind and the column's precipitable water.
+    The STP mask (>= 0.5) is applied when drawing."""
+    sfcp = col["p"][0]
+    u3 = interp_at_p(col["u"], col["p"], np.full_like(sfcp, 300.0))
+    v3 = interp_at_p(col["v"], col["p"], np.full_like(sfcp, 300.0))
+    sr300 = np.hypot(u3 - cu, v3 - cv) * KT_PER_MS
+    sr_u10, sr_v10 = u[0] - cu, v[0] - cv
+    llsr = np.hypot(sr_u10, sr_v10) * KT_PER_MS
+    pw_in = precipitable_water(col) / 25.4
+    sr_term = np.clip((sr300 - TV_SR_FLOOR_KT) / (TV_SR_CEIL_KT - TV_SR_FLOOR_KT), 0, 1)
+    ll_term = np.clip((llsr - TV_LLSR_FLOOR_KT) / (TV_LLSR_CEIL_KT - TV_LLSR_FLOOR_KT), 0, 1)
+    pw_term = (np.clip((TV_PW_NEUTRAL_IN - pw_in) / TV_PW_DRY_IN, 0, 1)
+               + np.clip((TV_PW_NEUTRAL_IN - pw_in) / TV_PW_WET_IN, -1, 0)) * TV_PW_WEIGHT
+    tvis = np.clip(np.maximum(sr_term, ll_term) + pw_term, 0, 1)
+    # critical angle: 10 m storm-relative wind vs the 0-500 m shear vector (Esterheld &
+    # Giuliano 2008). MesoXV has the 500 m wind from its 100 m profile, so no 80 m / 925 mb
+    # interpolation is needed as in Tornado Visibility.
+    k5 = int(round(500.0 / HGT_STEP))
+    sh_u, sh_v = u[k5] - u[0], v[k5] - v[0]
+    m_sr, m_sh = np.hypot(sr_u10, sr_v10), np.hypot(sh_u, sh_v)
+    cosa = np.clip((sr_u10 * sh_u + sr_v10 * sh_v) / np.maximum(m_sr * m_sh, 1e-9), -1, 1)
+    crit = np.degrees(np.arccos(cosa))
+    crit = np.where((m_sr > 2.0) & (m_sh > 1.0) & (zs < TV_CA_OROG_MAX), crit, np.nan)
+    return {"tvis": tvis, "sr300": sr300, "llsr": llsr, "pw": pw_in, "crit": crit}

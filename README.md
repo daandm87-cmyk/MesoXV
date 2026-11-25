@@ -14,7 +14,7 @@ Live page (when running): https://daandm87-cmyk.github.io/MesoXV/
 | Surface | dewpoint, isobars, wind · moisture flux convergence · 1-hour pressure change |
 | Instability | SB / ML (100 mb) / MU CAPE with CIN · 1-hour MLCAPE change · 1-hour MLCIN change (cap weakening) · ML LCL height · 700-500 mb lapse rate |
 | Wind shear | 0-1 and 0-3 km SRH with Bunkers right-mover motion · 0-6 km bulk shear |
-| Composites | STP (fixed layer) · SCP (fixed layer) |
+| Composites | STP (fixed layer) · tornado visibility (HP / Classic / LP) · SCP (fixed layer) |
 
 US units (F, kt, J/kg, m2/s2, mb); times in US Central and UTC. Palettes avoid
 red/green contrasts.
@@ -32,6 +32,12 @@ red/green contrasts.
 4. **Parcels and winds:** surface-based, 100 mb mixed-layer and most-unstable
    parcels (pseudo-adiabatic, virtual temperature); Bunkers right mover with SPC's
    convention (0-6 km non-pressure-weighted mean wind); SRH from the RTMA 10 m wind up.
+
+**Tornado visibility** uses the formula of the companion Tornado Visibility map: the
+stronger of the anvil-level (300 mb) and surface storm-relative winds, nudged by
+precipitable water, shown where STP is 0.5 or more, with the critical-angle band
+(85-95 degrees) hatched. Here the surface wind is the 15-minute RTMA analysis and the
+storm motion is the SPC-convention Bunkers right mover.
 
 Checked against MetPy on identical soundings (CAPE within 2-5 %, CIN and LCL height
 essentially identical) and against HRRR's own CAPE fields (correlation 0.995-0.998).

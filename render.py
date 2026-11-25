@@ -58,6 +58,14 @@ def _cin_hatch(key):
 
 RADAR = ("radar",)        # MRMS composite reflectivity outlines, 35 and 50 dBZ
 
+# Tornado Visibility's storm-mode colours (C:\Tornado_Visibility\chase_beauty.py): purple/blue HP,
+# a flat teal Classic block, yellow-green to yellow LP. No red/green opposition.
+from matplotlib.colors import LinearSegmentedColormap
+TV_CMAP = LinearSegmentedColormap.from_list("hp_classic_lp", [
+    (0.00, "#3b0a4a"), (0.40, "#3a72b8"), (0.4001, "#1fb89a"), (0.60, "#1fb89a"),
+    (0.6001, "#a8d63a"), (1.00, "#fce91a")])
+TV_LEVELS = [round(x, 2) for x in np.arange(0, 1.0001, 0.05)]
+
 
 PRODUCTS = {
     "sfc": dict(title="Surface: dewpoint, pressure, wind", units="Dewpoint (F)",
@@ -112,6 +120,13 @@ PRODUCTS = {
                 fill=(lambda d: d["scp"], [1, 2, 4, 6, 8, 12, 16, 20], "BuPu", "max"),
                 over=[_cin_hatch("mlcin"), RADAR],
                 show=(lambda d: d["scp"], 1, "no SCP of 1 or more")),
+    "tvis": dict(title="Tornado visibility: HP / Classic / LP",
+                 units="Where STP >= 0.5. Storm-relative wind at the anvil (300 mb) or at the surface, "
+                       "whichever is stronger, nudged by PW  ·  hatched: critical angle 85-95°",
+                 fill=(lambda d: np.where(d["stp"] >= 0.5, d["tvis"], np.nan), TV_LEVELS, TV_CMAP, "neither"),
+                 over=[("crit",), RADAR],
+                 ticks=([0.2, 0.5, 0.8], ["HP (anvil SR wind 40 kt or less)", "Classic", "LP (60 kt or more)"]),
+                 show=(lambda d: d["stp"], 0.5, "no STP of 0.5 or more, so no tornado environment to rate")),
     "lr75": dict(title="700-500 mb lapse rate", units="Lapse rate (C/km)",
                  fill=(lambda d: d["lr75"], [6, 6.5, 7, 7.5, 8, 8.5, 9], "Oranges", "max"),
                  over=[],
@@ -130,7 +145,7 @@ PRODUCTS = {
                    show=(lambda d: np.abs(d["dmlcin1h"]), 25, "no MLCIN changes of 25+ J/kg in unstable air in the last hour")),
 }
 ORDER = ["sfc", "mfc", "pchg", "sbcape", "mlcape", "mucape", "capechg", "cinchg", "lcl", "lr75",
-         "srh1", "srh1obs", "srh3", "shear", "stp", "scp"]
+         "srh1", "srh1obs", "srh3", "shear", "stp", "tvis", "scp"]
 
 _FEATURES = {}
 
@@ -201,7 +216,7 @@ def render(d, grid, product, region, label, source):
     field = fn(d)
     cs = None
     if field is not None:
-        cm = plt.get_cmap(cmap)
+        cm = plt.get_cmap(cmap) if isinstance(cmap, str) else cmap
         norm = BoundaryNorm(levels, cm.N, extend=extend)
         cs = ax.contourf(x, y, field, levels=levels, cmap=cm, norm=norm, extend=extend,
                          transform=HRRR_CRS, alpha=0.88, zorder=1)
@@ -263,6 +278,18 @@ def render(d, grid, product, region, label, source):
                 cs_override = (vs, vlev)
                 if cs is not None:
                     cs.set_alpha(0.4)               # SRH shading as background only
+        elif kind == "crit":
+            # Tornado Visibility's critical-angle band (85-95 deg) inside the STP mask: light-grey
+            # hatching over a near-invisible real fill (fill 'none' can hatch the whole axes)
+            ca = d["crit"]
+            band = ((ca >= 85) & (ca <= 95) & (d["stp"] >= 0.5)).astype(np.float32)
+            fav = gaussian_filter(band, 2.0 / grid.step)
+            if (fav > 0.5).any():
+                with matplotlib.rc_context({"hatch.color": "#dddddd", "hatch.linewidth": 0.6}):
+                    ax.contourf(x, y, fav, levels=[0.5, 1.01], colors=[matplotlib.colors.to_rgba("#dddddd", 0.45)],
+                                hatches=["////"], transform=HRRR_CRS, zorder=2)
+                ax.contour(x, y, fav, levels=[0.5], colors="#dddddd", linewidths=0.8, alpha=0.75,
+                           transform=HRRR_CRS, zorder=2)
         elif kind == "arrows":
             u, v = d[ov[1]] * KT, d[ov[2]] * KT
             q = ax.quiver(x[::st], y[::st], u[::st, ::st], v[::st, ::st], color=INK, scale=900, width=0.0022,
@@ -283,6 +310,8 @@ def render(d, grid, product, region, label, source):
     if cs is not None:
         cax = fig.add_axes([0.2, 0.78 / h_in, 0.6, 0.22 / h_in])
         cb = fig.colorbar(cs, cax=cax, orientation="horizontal", ticks=levels)
+        if spec.get("ticks") and cs_override is None:
+            cb.set_ticks(spec["ticks"][0], labels=spec["ticks"][1])
         cb.ax.tick_params(labelsize=8)
         cb.set_label(spec["units"], fontsize=9)
     fig.text(0.012, 0.06 / h_in, source, ha="left", va="bottom", fontsize=7.5, color="#555")
